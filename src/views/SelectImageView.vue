@@ -286,9 +286,9 @@ function getSrc(index_key:string){
 //     ()=>{return imageMap.get(selectedValue.radio12)}
 // )
 
-const list1:any[any] =  ref([])
-const list2:any[any] =  ref([])
-const list3:any[any] = ref([])
+let list1:any[any] =  ref([])
+let list2:any[any] =  ref([])
+let list3:any[any] = ref([])
 const list0 = ref([
     {"id": selectedValue.radio1},
     {"id": selectedValue.radio2},
