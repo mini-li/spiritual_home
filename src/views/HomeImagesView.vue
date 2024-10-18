@@ -1,17 +1,11 @@
 <template>
   <el-header>
-   <el-row>
-    <el-col :span="6" />
-    <el-col :span="18">
-        <el-text  tag="b" class="mx-1" size="large" style="margin-bottom: 20px;">
-            下面12行卡片的每一行中选择一张更符合你的性格特点的卡片({{ totalSelect }}/12)
-            </el-text>
-          
-            <el-button v-if="totalSelect==12" type="success" round style="margin-left: 20px;">下一步</el-button>
-            
-        
-    </el-col>
-    </el-row>
+    <div style="margin-left: 35%; margin-top: 2%">
+      <el-text  tag="b" class="mx-1" size="large" style="text-align: center;">
+            从下面24行卡片中选出12张,每一行的两张中选一张({{ totalSelect }}/12)
+            <el-button v-if="totalSelect==12" type="success" round style="margin-left: 20px;" @click="toSelect">下一步</el-button>
+        </el-text>
+    </div>
   </el-header>
   <el-main>
 
@@ -20,10 +14,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio1">
-          <el-col :span="11" > <el-radio-button value="red_2_1"  ><el-image :src="red_2_1"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio1">
+          <el-col :span="11" > <el-radio-button value="11"  ><el-image :src="red_2_1"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="green_2_1" ><el-image :src="green_2_1" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="12" ><el-image :src="green_2_1" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -32,10 +26,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio2">
-          <el-col :span="11" > <el-radio-button value="red_1_0"  ><el-image :src="red_1_0"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio2">
+          <el-col :span="11" > <el-radio-button value="21"  ><el-image :src="red_1_0"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="blue_3_1" ><el-image :src="blue_3_1" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="22" ><el-image :src="blue_3_1" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -44,10 +38,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio3">
-          <el-col :span="11" > <el-radio-button value="red_1_1"  ><el-image :src="red_1_1"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio3">
+          <el-col :span="11" > <el-radio-button value="31"  ><el-image :src="red_1_1"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="blue_3_0" ><el-image :src="blue_3_0" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="22" ><el-image :src="blue_3_0" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -56,10 +50,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio4">
-          <el-col :span="11" > <el-radio-button value="red_2_0"  ><el-image :src="red_2_0"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio4">
+          <el-col :span="11" > <el-radio-button value="41"  ><el-image :src="red_2_0"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="yellow_2_1" ><el-image :src="yellow_2_1" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="42" ><el-image :src="yellow_2_1" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -68,10 +62,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio5">
-          <el-col :span="11" > <el-radio-button value="red_3_1"  ><el-image :src="red_3_1"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio5">
+          <el-col :span="11" > <el-radio-button value="51"  ><el-image :src="red_3_1"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="blue_1_1" ><el-image :src="blue_1_1" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="52" ><el-image :src="blue_1_1" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -80,10 +74,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio6">
-          <el-col :span="11" > <el-radio-button value="red_3_0"  ><el-image :src="red_3_0"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio6">
+          <el-col :span="11" > <el-radio-button value="61"  ><el-image :src="red_3_0"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="blue_1_0" ><el-image :src="blue_1_0" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="62" ><el-image :src="blue_1_0" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -92,10 +86,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio7">
-          <el-col :span="11" > <el-radio-button value="blue_2_1"  ><el-image :src="blue_2_1"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio7">
+          <el-col :span="11" > <el-radio-button value="71"  ><el-image :src="blue_2_1"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="yellow_2_0" ><el-image :src="yellow_2_0" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="72" ><el-image :src="yellow_2_0" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -104,35 +98,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio8">
-          <el-col :span="11" > <el-radio-button value="blue_2_0"  ><el-image :src="blue_2_0"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio8">
+          <el-col :span="11" > <el-radio-button value="81"  ><el-image :src="blue_2_0"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="green_2_0" ><el-image :src="green_2_0" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
-
-
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="radio9">
-          <el-col :span="11" > <el-radio-button value="yellow_1_1"  ><el-image :src="yellow_1_1"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="green_3_1" ><el-image :src="green_3_1" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
-
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="radio10">
-          <el-col :span="11" > <el-radio-button value="yellow_1_0"  ><el-image :src="yellow_1_0"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="green_3_0" ><el-image :src="green_3_0" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="82" ><el-image :src="green_2_0" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -142,10 +111,10 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio11">
-          <el-col :span="11" > <el-radio-button value="yellow_3_1"  ><el-image :src="yellow_3_1"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio9">
+          <el-col :span="11" > <el-radio-button value="91"  ><el-image :src="yellow_1_1"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="green_1_0" ><el-image :src="green_1_0" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="92" ><el-image :src="green_3_1" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -154,10 +123,35 @@
     <el-row style="margin-bottom: 20px;">
       <el-col :span="6" />
       <el-col :span="12" >
-        <el-radio-group v-model="radio12">
-          <el-col :span="11" > <el-radio-button value="yellow_3_0"  ><el-image :src="yellow_3_0"  /> </el-radio-button></el-col>
+        <el-radio-group v-model="selectedValue.radio10">
+          <el-col :span="11" > <el-radio-button value="a1"  ><el-image :src="yellow_1_0"  /> </el-radio-button></el-col>
           <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="green_1_1" ><el-image :src="green_1_1" /> </el-radio-button></el-col>
+          <el-col :span="11" > <el-radio-button value="a2" ><el-image :src="green_3_0" /> </el-radio-button></el-col>
+        </el-radio-group>
+      </el-col>
+      <el-col :span="6" />
+    </el-row>
+
+
+    <el-row style="margin-bottom: 20px;">
+      <el-col :span="6" />
+      <el-col :span="12" >
+        <el-radio-group v-model="selectedValue.radio11">
+          <el-col :span="11" > <el-radio-button value="b1"  ><el-image :src="yellow_3_1"  /> </el-radio-button></el-col>
+          <el-col :span="2" ></el-col>
+          <el-col :span="11" > <el-radio-button value="b2" ><el-image :src="green_1_0" /> </el-radio-button></el-col>
+        </el-radio-group>
+      </el-col>
+      <el-col :span="6" />
+    </el-row>
+
+    <el-row style="margin-bottom: 20px;">
+      <el-col :span="6" />
+      <el-col :span="12" >
+        <el-radio-group v-model="selectedValue.radio12">
+          <el-col :span="11" > <el-radio-button value="c1"  ><el-image :src="yellow_3_0"  /> </el-radio-button></el-col>
+          <el-col :span="2" ></el-col>
+          <el-col :span="11" > <el-radio-button value="c2" ><el-image :src="green_1_1" /> </el-radio-button></el-col>
         </el-radio-group>
       </el-col>
       <el-col :span="6" />
@@ -169,6 +163,7 @@
 <script lang="ts" setup>
 
 import { ref,computed  } from 'vue'
+import {RouterLink, RouterView, useRouter} from "vue-router";
 
 // 1
 // 正红色2分：主动帮助别人
@@ -254,73 +249,74 @@ import yellow_3_0 from '@/assets/images/yellow_3_0.png'
 import green_1_1 from '@/assets/images/green_1_1.png'
 
 
-const radio1 = ref('')
-const radio2 = ref('')
-const radio3 = ref('')
-const radio4 = ref('')
-const radio5 = ref('')
-const radio6 = ref('')
-const radio7 = ref('')
-const radio8 = ref('')
-const radio9 = ref('')
-const radio10 = ref('')
-const radio11 = ref('')
-const radio12 = ref('')
-
+import { useSelectValueStore } from '@/stores/selected'
+import { watch } from 'vue'
+const selectedValue = useSelectValueStore()
 
 const totalSelect = computed(() => {
     const count = ref(0)
-    if (radio1.value !== ''){
+    if (selectedValue.radio1 !== ''){
       count.value+=1
     }
-    if (radio2.value !== ''){
+    if (selectedValue.radio2 !== ''){
       count.value+=1
     }
-    if (radio3.value !== ''){
+    if (selectedValue.radio3 !== ''){
       count.value+=1
     }
-    if (radio4.value !== ''){
+    if (selectedValue.radio4 !== ''){
       count.value+=1
     }
-    if (radio5.value !== ''){
+    if (selectedValue.radio5 !== ''){
       count.value+=1
     }
-    if (radio6.value !== ''){
+    if (selectedValue.radio6 !== ''){
       count.value+=1
     }
-    if (radio7.value !== ''){
+    if (selectedValue.radio7 !== ''){
       count.value+=1
     }
-    if (radio8.value !== ''){
+    if (selectedValue.radio8 !== ''){
       count.value+=1
     }
-    if (radio9.value !== ''){
+    if (selectedValue.radio9 !== ''){
       count.value+=1
     }
-    if (radio10.value !== ''){
+    if (selectedValue.radio10 !== ''){
       count.value+=1
     }
-    if (radio11.value !== ''){
+    if (selectedValue.radio11 !== ''){
       count.value+=1
     }
-    if (radio12.value !== ''){
+    if (selectedValue.radio12 !== ''){
       count.value+=1
     }
     return count.value
 	})
 
+
+  const router = useRouter();
+  function toSelect() {
+    router.push({path:'/select'})
+} 
+
+watch(() => selectedValue.radio1, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio1:newValue })
+});
 </script>
 <style>
 .el-header {
         position: relative;
         width: 100%;
-        height: 60px;    
-        margin-top: 20px;  
+        height: 8%;    
+        margin-top: 2%;  
     }
 .el-main {
   position: absolute;
   right: 0;
-  top: 60px;
+  top: 10%;
   bottom: 0;
   overflow-y: scroll;
   }

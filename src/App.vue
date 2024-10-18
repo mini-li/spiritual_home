@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import SelectImages from './components/SelectImages.vue'
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  
-  <SelectImages />
-   
+  <RouterView />
 </template>
