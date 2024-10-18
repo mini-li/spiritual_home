@@ -289,7 +289,7 @@ function getSrc(index_key:string){
 let list1:any[] =  reactive([])
 let list2:any[] =  reactive([])
 let list3:any[] = reactive([])
-const list0 = ref([
+let list0 = reactive([
     {"id": selectedValue.radio1},
     {"id": selectedValue.radio2},
     {"id": selectedValue.radio3},
