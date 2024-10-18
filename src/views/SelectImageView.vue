@@ -19,7 +19,7 @@
     >
     <el-image :src="getSrc(item.id)"   fit="contain"/>
     </div>
-    <div class="place_container" v-if="list1.length==0"></div>
+    <div class="place_container" v-if="list1.length!=4"></div>
       
       
       </VueDraggable>
@@ -42,7 +42,7 @@
       >
       <el-image :src="getSrc(item.id)"   fit="contain"/>
       </div>
-      <div class="place_container" v-if="list2.length==0"></div>
+      <div class="place_container" v-if="list2.length!=4"></div>
       </VueDraggable>
 
       <el-text size="large" tag="b">
@@ -64,7 +64,7 @@
       <el-image :src="getSrc(item.id)"   fit="contain"/>
       
       </div>
-      <div class="place_container" v-if="list3.length==0"></div>
+      <div class="place_container" v-if="list3.length!=4"></div>
       </VueDraggable>
       <el-text  tag="b" class="mx-1" size="large">从下面选好的12张卡片中,按照符合程序进程分类,将对应的卡片拖拽到对应的行</el-text>
       <VueDraggable
