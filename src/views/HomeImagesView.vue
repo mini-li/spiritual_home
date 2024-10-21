@@ -1,163 +1,166 @@
 <template>
-  <el-header>
-    <div style="margin-left: 35%; margin-top: 2%">
-      <el-text  tag="b" class="mx-1" size="large" style="text-align: center;">
-            从下面24行卡片中选出12张,每一行的两张中选一张({{ totalSelect }}/12)
-            <el-button v-if="totalSelect==12" type="success" round style="margin-left: 20px;" @click="toSelect">下一步</el-button>
-        </el-text>
-    </div>
-  </el-header>
-  <el-main>
+   <div class="common-layout">
+    <el-container>
+      <el-header>
+        <el-container>
+          <div class="logo-container"><el-image :src="logo" alt="logo-images" fit="contain"/></div>
 
-  
- <div ref="containerRef" style="overflow-y: auto">
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio1">
-          <el-col :span="11" > <el-radio-button value="11"  ><el-image :src="red_2_1"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="12" ><el-image :src="green_2_1" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
-
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio2">
-          <el-col :span="11" > <el-radio-button value="21"  ><el-image :src="red_1_0"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="22" ><el-image :src="blue_3_1" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
-
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio3">
-          <el-col :span="11" > <el-radio-button value="31"  ><el-image :src="red_1_1"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="22" ><el-image :src="blue_3_0" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+          <div>
+            <h1>心灵家园-性格色彩卡片测试</h1>
+            <h5>
+              <el-text  tag="b" class="mx-1" size="large" style="text-align: center;">
+                    从下面24行卡片中选出12张,每一行的两张中选一张({{ totalSelect }}/12)
+                    <el-button v-if="totalSelect==12" type="success" round style="margin-left: 20px;" @click="toSelect">下一步</el-button>
+                </el-text>
+            </h5>
+          </div>
+        </el-container>
         
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio4">
-          <el-col :span="11" > <el-radio-button value="41"  ><el-image :src="red_2_0"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="42" ><el-image :src="yellow_2_1" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+       
+      </el-header> 
+      <el-main>
+        <div style="margin-bottom: 2%;">
+          <el-row>
+            <el-col :span="11"></el-col>
+            <el-col :span="13">
+              <el-button v-if="activeStep>1 && activeStep < 13"   @click="activeStep--" plain :style="{
+                boxShadow: `var(${'--el-box-shadow'})`,
+              }">上一组</el-button>
+              <el-button v-if="activeStep>0 && activeStep < 12" @click="activeStep++" :style="{
+                boxShadow: `var(${'--el-box-shadow'})`,
+              }">下一组</el-button>
+            </el-col>
+          </el-row>
+          
+    
+        </div>
+        <el-row v-if="activeStep==1">
+            <!-- <el-col :span="6" /> -->
+            <el-col :span="24" >
+              <el-radio-group v-model="selectedValue.radio1">
+                <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="11"  ><el-image :src="red_2_1"  /> </el-radio-button></el-col>
+                <el-col :span="2" ></el-col>
+                <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="12" ><el-image :src="green_2_1" /> </el-radio-button></el-col>
+              </el-radio-group>
+            </el-col>
+          </el-row>
 
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio5">
-          <el-col :span="11" > <el-radio-button value="51"  ><el-image :src="red_3_1"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="52" ><el-image :src="blue_1_1" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+        <el-row  v-if="activeStep==2">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio2">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="21"  ><el-image :src="red_1_0"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="22" ><el-image :src="blue_3_1" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
 
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio6">
-          <el-col :span="11" > <el-radio-button value="61"  ><el-image :src="red_3_0"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="62" ><el-image :src="blue_1_0" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+        <el-row  v-if="activeStep==3">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio3">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="31"  ><el-image :src="red_1_1"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="22" ><el-image :src="blue_3_0" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
+        
+        <el-row  v-if="activeStep==4">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio4">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="41"  ><el-image :src="red_2_0"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="42" ><el-image :src="yellow_2_1" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
 
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio7">
-          <el-col :span="11" > <el-radio-button value="71"  ><el-image :src="blue_2_1"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="72" ><el-image :src="yellow_2_0" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+        <el-row  v-if="activeStep==5">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio5">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="51"  ><el-image :src="red_3_1"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="52" ><el-image :src="blue_1_1" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
 
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio8">
-          <el-col :span="11" > <el-radio-button value="81"  ><el-image :src="blue_2_0"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="82" ><el-image :src="green_2_0" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+        <el-row  v-if="activeStep==6">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio6">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="61"  ><el-image :src="red_3_0"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="62" ><el-image :src="blue_1_0" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
 
+        <el-row  v-if="activeStep==7">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio7">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="71"  ><el-image :src="blue_2_1"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="72" ><el-image :src="yellow_2_0" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
 
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio9">
-          <el-col :span="11" > <el-radio-button value="91"  ><el-image :src="yellow_1_1"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="92" ><el-image :src="green_3_1" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
-
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio10">
-          <el-col :span="11" > <el-radio-button value="a1"  ><el-image :src="yellow_1_0"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="a2" ><el-image :src="green_3_0" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+        <el-row  v-if="activeStep==8">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio8">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="81"  ><el-image :src="blue_2_0"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="82" ><el-image :src="green_2_0" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
 
 
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio11">
-          <el-col :span="11" > <el-radio-button value="b1"  ><el-image :src="yellow_3_1"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="b2" ><el-image :src="green_1_0" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+        <el-row  v-if="activeStep==9">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio9">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="91"  ><el-image :src="yellow_1_1"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="92" ><el-image :src="green_3_1" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
 
-    <el-row style="margin-bottom: 20px;">
-      <el-col :span="6" />
-      <el-col :span="12" >
-        <el-radio-group v-model="selectedValue.radio12">
-          <el-col :span="11" > <el-radio-button value="c1"  ><el-image :src="yellow_3_0"  /> </el-radio-button></el-col>
-          <el-col :span="2" ></el-col>
-          <el-col :span="11" > <el-radio-button value="c2" ><el-image :src="green_1_1" /> </el-radio-button></el-col>
-        </el-radio-group>
-      </el-col>
-      <el-col :span="6" />
-    </el-row>
+        <el-row  v-if="activeStep==10">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio10">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="a1"  ><el-image :src="yellow_1_0"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="a2" ><el-image :src="green_3_0" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
+
+
+        <el-row  v-if="activeStep==11">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio11">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="b1"  ><el-image :src="yellow_3_1"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="b2" ><el-image :src="green_1_0" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
+
+        <el-row  v-if="activeStep==12">
+          <el-col :span="24" >
+            <el-radio-group v-model="selectedValue.radio12">
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="c1"  ><el-image :src="yellow_3_0"  /> </el-radio-button></el-col>
+              <el-col :span="2" ></el-col>
+              <el-col :span="11" :style="{boxShadow: `var(${'--el-box-shadow'})`}"> <el-radio-button value="c2" ><el-image :src="green_1_1" /> </el-radio-button></el-col>
+            </el-radio-group>
+          </el-col>
+        </el-row>
+      </el-main>
+    </el-container>
   </div>
-</el-main>
+  
+  
 </template>
 
 <script lang="ts" setup>
@@ -248,6 +251,10 @@ import green_1_0 from '@/assets/images/green_1_0.png'
 import yellow_3_0 from '@/assets/images/yellow_3_0.png'
 import green_1_1 from '@/assets/images/green_1_1.png'
 
+// logo
+import logo from '@/assets/images/icon.jpg'
+
+
 
 import { useSelectValueStore } from '@/stores/selected'
 import { watch } from 'vue'
@@ -305,19 +312,36 @@ watch(() => selectedValue.radio1, (newValue, oldValue) => {
     console.log(newValue)
     selectedValue.$patch({ radio1:newValue })
 });
+
+
+const activeStep = ref(1)
 </script>
-<style>
+
+<style scoped>
 .el-header {
-        position: relative;
-        width: 100%;
-        height: 8%;    
-        margin-top: 2%;  
-    }
-.el-main {
-  position: absolute;
-  right: 0;
-  top: 10%;
-  bottom: 0;
-  overflow-y: scroll;
-  }
+    position: relative;
+    width: 100%;
+    height: 120px;
+    background-color: #f2f2f2;
+}
+
+h1 {
+  text-align: center;
+}
+
+h5 {
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  /* align-items: center; */
+  width: 36%;
+  height: 120px;
+}
+.shadow {
+  
+  boxShadow: var('--el-box-shadow')
+       
+}
 </style>

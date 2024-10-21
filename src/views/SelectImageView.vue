@@ -1,7 +1,7 @@
 <template>
     <div class="flex" style="margin-top: 2%;">
         <el-text tag="b" size="large" style="margin-bottom: 5px;">
-            高符合的四个卡片
+            最符合的四个卡片
         </el-text>
       <VueDraggable
         v-model="list1"
@@ -19,13 +19,32 @@
     >
     <el-image :src="getSrc(item.id)"   fit="contain"/>
     </div>
-    <div class="place_container" v-if="list1.length<4"></div>
+
+    <div v-if="list1.length<4" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+        <text class="center-vertical center-horizontal ">最符合</text> 
+    </div> 
+    <div v-if="list1.length<3" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+        <text class="center-vertical center-horizontal">最符合</text> 
+    </div> 
+    <div v-if="list1.length<2" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+      <text class="center-vertical center-horizontal ">最符合</text> 
+    </div> 
+    <div v-if="list1.length<1" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+      <text class="center-vertical center-horizontal">最符合</text> 
+    </div> 
+    <!-- <div v-if="list1.length<4" style="display: inline-block;height: 100px;width: 12%; margin-left: 2%; background: red;"> </div>
+    <div v-if="list1.length<4" style="display: inline-block;height: 100px;width: 12%; margin-left: 2%; background: red;"> </div>
+    <div v-if="list1.length<4" style="display: inline-block;height: 100px;width: 12%; margin-left: 2%; background: red;"> </div> -->
+
+    <!-- <div class="place_container" v-if="list1.length<3" style="margin-left: 2%;"> <el-text class="center-vertical center-horizontal">最符合</el-text></div>
+    <div class="place_container" v-if="list1.length<2" style="margin-left: 2%;"> <el-text class="center-vertical center-horizontal">最符合</el-text></div>
+    <div class="place_container" v-if="list1.length<1" style="margin-left: 2%;"> <el-text class="center-vertical center-horizontal">最符合</el-text></div> -->
       
       
       </VueDraggable>
 
       <el-text size="large" tag="b">
-        中符合的四个卡片
+        比较符合的四个卡片
     </el-text>
       <VueDraggable
         v-model="list2"
@@ -42,11 +61,24 @@
       >
       <el-image :src="getSrc(item.id)"   fit="contain"/>
       </div>
-      <div class="place_container" v-if="list2.length<4"></div>
+
+      <div v-if="list2.length<4" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+        <text class="center-vertical center-horizontal ">比较符合</text> 
+      </div> 
+      <div v-if="list2.length<3" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+          <text class="center-vertical center-horizontal">比较符合</text> 
+      </div> 
+      <div v-if="list2.length<2" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+          <text class="center-vertical center-horizontal ">比较符合</text> 
+      </div> 
+      <div v-if="list2.length<1" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+          <text class="center-vertical center-horizontal">比较符合</text> 
+      </div> 
+
       </VueDraggable>
 
       <el-text size="large" tag="b">
-        中符合的四个卡片
+        一般符合的四个卡片
         </el-text>
       <VueDraggable
         v-model="list3"
@@ -64,7 +96,21 @@
       <el-image :src="getSrc(item.id)"   fit="contain"/>
       
       </div>
-      <div class="place_container" v-if="list3.length<4"></div>
+      
+      <div v-if="list3.length<4" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+        <text class="center-vertical center-horizontal ">一般符合</text> 
+      </div> 
+      <div v-if="list3.length<3" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+          <text class="center-vertical center-horizontal">一般符合</text> 
+      </div> 
+      <div v-if="list3.length<2" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+        <text class="center-vertical center-horizontal ">一般符合</text> 
+      </div> 
+      <div v-if="list3.length<1" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
+        <text class="center-vertical center-horizontal">一般符合</text> 
+      </div> 
+
+
       </VueDraggable>
       <el-text  tag="b" class="mx-1" size="large">从下面选好的12张卡片中,按照符合程序进程分类,将对应的卡片拖拽到对应的行</el-text>
       <VueDraggable
@@ -81,7 +127,13 @@
         :key="item.id"
         class="image_container cursor-move h-30 bg-gray-500/5 rounded p-3"
       >
-      <el-image :src="getSrc(item.id)"   fit="contain"/>
+      <el-image :src="getSrc(item.id)"   fit="contain">
+        <template #error>
+          <div class="image-slot">
+            <el-icon><icon-picture /></el-icon>
+          </div>
+        </template>
+      </el-image>
       </div>
         <!-- <div class="image_container cursor-move" :key="2"><el-image :src="radio2_src"   :fit="contain"/></div> -->
         <!-- <div class="image_container cursor-move" :key="3"><el-image :src="radio3_src"   :fit="contain"/></div>
@@ -309,13 +361,16 @@ const list0 = ref([
 .place_container {  
     display: inline-block;
     width:  16%;
-    height:  16vh;
     background-color: rgb(214, 220, 228);
-    border: 1px;
+    margin-left: 2%;
+    height: 17vh;
+    vertical-align:top;
 }
 .image_container {
     display: inline-block;
     width:16%;
+    height: 16vh;
+    margin-left: 2%;
 }
 .move-target {
     border-radius: 4px;
@@ -328,5 +383,25 @@ const list0 = ref([
 .container {
   display: grid;
   gap: 10px;
+}
+.center-vertical{
+  position: relative;
+  top:40%;
+  transform:translateY(-50%);
+}
+.center-horizontal{
+  position: relative;
+  left:40%;
+  transform:translateX(-50%); 
+}
+.image-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--el-fill-color-light);
+  color: var(--el-text-color-secondary);
+  font-size: 100px;
 }
 </style>
