@@ -9,10 +9,12 @@
             <h1>心灵家园-性格色彩卡片测试</h1>
             <h5>
               <el-text  tag="b" class="mx-1" size="large" style="text-align: center;">
-                    从下面24行卡片中选出12张,每一行的两张中选一张({{ totalSelect }}/12)
-                    <el-button v-if="totalSelect==12" type="success" round style="margin-left: 20px;" @click="toSelect">下一步</el-button>
+                    从12组卡片中选出12张符合自己的卡片({{ totalSelect }}/12)
                 </el-text>
             </h5>
+            <div style="display: flex; justify-content: center;">
+              <el-button v-if="totalSelect==12" type="success" round style="margin-left: 20px;" @click="toSelect">下一步</el-button>
+            </div>
           </div>
         </el-container>
         
