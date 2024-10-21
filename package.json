@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "deploy": "gh-pages -d dist -r https://github.com/mini-li/spiritual_home.git -b mydeploy"
+    "deploy": "gh-pages -d dist -r https://github.com/mini-li/spiritual_home.git -b deploy"
   },
   "dependencies": {
     "element-plus": "^2.8.5",
