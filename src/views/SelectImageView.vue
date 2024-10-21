@@ -360,25 +360,17 @@ const list0 = ref([
 <style scoped>
 .place_container {  
     display: inline-block;
-    width:  20%;
+    width:  24%;
     background-color: rgb(214, 220, 228);
-    margin-left: 2%;
-    height: 17vh;
+    margin-left: 1%;
+    height: 18vh;
     vertical-align:top;
 }
 .image_container {
     display: inline-block;
-    width:20%;
-    height: 16vh;
-    margin-left: 2%;
-}
-.move-target {
-    border-radius: 4px;
-    min-height: 36px;
-    width: 20%;
-    height: 50%;
-    background-color: red;  
-    position: relative;  
+    width:24%;
+    height: 18vh;
+    margin-left: 1%;
 }
 .container {
   display: grid;

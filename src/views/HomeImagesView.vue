@@ -141,22 +141,27 @@
             </el-radio-group>
           </el-col>
         </el-row>
-      </el-main>
-      <el-footer>
         <div style="margin-top: 5%;">
-          <el-row>
-            <el-col :span="11"></el-col>
-            <el-col :span="13">
+        <el-row>
+          <el-col :span="11"></el-col>
+          <el-col :span="13">
+            <div style="display: inline-block;">
               <el-button v-if="activeStep>1 && activeStep < 13"   @click="activeStep--" plain :style="{
                 boxShadow: `var(${'--el-box-shadow'})`,
               }">上一组</el-button>
+            </div>
+            <div style="display: inline-block;">
               <el-button v-if="activeStep>0 && activeStep < 12" @click="nextStep" :style="{
                 boxShadow: `var(${'--el-box-shadow'})`,
               }">下一组</el-button>
-            </el-col>
-          </el-row>
-        </div>
-      </el-footer>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      </el-main>
+      
+      
+      
     </el-container>
   </div>
   
@@ -376,7 +381,7 @@ h5 {
 
 .el-main {
   position: relative;
-  top:10%;
-  transform:translateY(+10%);
+  top:18%;
+  transform:translateY(+18%);
 }
 </style>
