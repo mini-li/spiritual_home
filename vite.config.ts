@@ -13,7 +13,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: '/spiritual_home/',
+  // base: '/spiritual_home/',
   build: {
     // outDir: 'spiritual_home'
   }

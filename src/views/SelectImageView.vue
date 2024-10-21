@@ -360,7 +360,7 @@ const list0 = ref([
 <style scoped>
 .place_container {  
     display: inline-block;
-    width:  16%;
+    width:  20%;
     background-color: rgb(214, 220, 228);
     margin-left: 2%;
     height: 17vh;
@@ -368,7 +368,7 @@ const list0 = ref([
 }
 .image_container {
     display: inline-block;
-    width:16%;
+    width:20%;
     height: 16vh;
     margin-left: 2%;
 }
