@@ -130,15 +130,20 @@
       </VueDraggable>
       <div v-if="list1.length == 4 && list2.length==4 && list3.length==4" style="margin-bottom: 12px;">
       <!-- <div> -->
-        <el-text class="mx-1" size="large" style="background-color: #d7502f;"><br/>活泼型:{{redScore}} 分</el-text>
-        <el-text class="mx-1" size="large" style="background-color: #4693be;">完美型：{{blueScore}} 分</el-text>
-        <el-text class="mx-1" size="large" style="background-color: #f7d522;">力量型：{{yellowScore}} 分</el-text>
-        <el-text class="mx-1" size="large" style="background-color: #4aac4f;">和平型：{{greenScore}} 分</el-text>
+        <el-row>
+          <el-text class="mx-1"  style="background-color: #d7502f; border-radius: 5px; color: white; width: 24%;">活泼型: {{redScore}}分</el-text> 
+          <el-text class="mx-1"  style="background-color: #4693be; border-radius: 5px; color: white; width: 24%; margin-left: 3px">完美型：{{blueScore}}分</el-text>
+          <el-text class="mx-1"  style="background-color: #f7d522; border-radius: 5px; color: white; width: 24%; margin-left: 3px">力量型：{{yellowScore}}分</el-text> 
+          <el-text class="mx-1"  style="background-color: #4aac4f; border-radius: 5px; color: white; width: 24%; margin-left: 3px">和平型：{{greenScore}}分</el-text>  
+          <el-col>
+            <h3>把截图发给咨询师</h3>
+          </el-col>
+        </el-row>
       </div>
-      <div style="margin-bottom: 12px;">
+      <div v-else style="margin-bottom: 12px;">
         <el-text  tag="b" class="mx-1" size="large" type="danger">测试前必读：</el-text>
         <el-text  class="mx-1" size="large" type="danger"> <br/>
-          从选好的12张卡牌中,按照最符合自己性格特点进行排序,将对应的卡牌拖拽到对应的行中,保存截图发给咨询师进行解读
+          从选好的12张卡牌中,按照最符合自己性格特点进行排序,将对应的卡牌拖拽到对应的行中
         </el-text>
       </div>
       
@@ -357,7 +362,7 @@ const selectedValue = useSelectValueStore()
 
 const lengthTip = () => {
   ElMessage({
-    message: '一行最多防4张卡牌.',
+    message: '一行最多放4张卡牌.',
     type: 'warning',
   })
 }
