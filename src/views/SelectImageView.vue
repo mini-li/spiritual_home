@@ -24,7 +24,7 @@
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
         group="myImage"
         @update="onUpdate"
-        @add="onAdd"
+        @add="onAdd1"
         @remove="remove"
       >
       
@@ -67,7 +67,7 @@
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
         group="myImage"
         @update="onUpdate"
-        @add="onAdd"
+        @add="onAdd2"
         @remove="remove"
       >
       <div
@@ -101,7 +101,7 @@
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
         group="myImage"
         @update="onUpdate"
-        @add="onAdd"
+        @add="onAdd3"
         @remove="remove"
       >
       <div
@@ -128,7 +128,7 @@
 
 
       </VueDraggable>
-      <el-text  tag="b" class="mx-1" size="large">从下面选好的12张卡片中,按照符合程序进程分类,将对应的卡片拖拽到对应的行</el-text>
+      <el-text  tag="b" class="mx-1" size="large" style="background-color:aquamarine;">从选好的12张卡牌中,按照最符合自己性格特点进行排序,将对应的卡牌拖拽到对应的行中,保存截图发给咨询师进行解读</el-text>
       <VueDraggable
         v-model="list0"
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
@@ -302,18 +302,53 @@ imageMap.set("c1",yellow_3_0)
 imageMap.set("c2",green_1_1)
 
 
-import { VueDraggable } from 'vue-draggable-plus'
 
 import { useSelectValueStore } from '@/stores/selected'
 import { ref,reactive, watch, computed } from 'vue'
 
 import {RouterLink, RouterView, useRouter} from "vue-router";
+import { ElMessage } from 'element-plus'
+import { VueDraggable, type DraggableEvent } from 'vue-draggable-plus'
+
 
 const selectedValue = useSelectValueStore()
+
+const lengthTip = () => {
+  ElMessage({
+    message: '一行最多防4张卡牌.',
+    type: 'warning',
+  })
+}
 
 function onUpdate() {
 console.log('update')
 }
+
+function onAdd1() {
+console.log('add1')
+// console.log(event)
+if (list1.value.length >4){
+    lengthTip()
+}
+}
+function onAdd2() {
+console.log('add2')
+// console.log(event)
+if (list2.value.length >4){
+    lengthTip()
+}
+}
+
+function onAdd3() {
+  console.log('add3')
+  // console.log(event)
+  if (list3.value.length >4){
+      lengthTip()
+  }
+  // console.log(event.to)
+    // list0.value.push(target)
+}
+
 function onAdd() {
 console.log('add')
 }
@@ -323,46 +358,10 @@ console.log('remove')
 function getSrc(index_key:string){
     return imageMap.get(index_key)
 }
-// const radio1_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio1)}
-// )
-// const radio2_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio2)}
-// )
-// const radio3_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio3)}
-// )
-// const radio4_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio4)}
-// )
-// const radio5_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio5)}
-// )
-// const radio6_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio6)}
-// )
-// const radio7_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio7)}
-// )
-// const radio8_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio8)}
-// )
-// const radio9_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio9)}
-// )
-// const radioa_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio10)}
-// )
-// const radiob_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio11)}
-// )
-// const radioc_src = computed(
-//     ()=>{return imageMap.get(selectedValue.radio12)}
-// )
 
-let list1:any[any] =  ref([])
-let list2:any[any] =  ref([])
-let list3:any[any] = ref([])
+let list1:any[any] =  ref<[]>([])
+let list2:any[any] =  ref<[]>([])
+let list3:any[any] = ref<[]>([])
 const list0 = ref([
     {"id": selectedValue.radio1},
     {"id": selectedValue.radio2},
@@ -381,6 +380,32 @@ const list0 = ref([
   function toHome() {
     router.push({path:'/'})
   } 
+
+  watch(list1, (newList1) => {
+    if (newList1.length > 4){
+      console.log("list1 多余4个了。")
+      console.log(newList1)
+      console.log(newList1.value)
+      list0.value.push(newList1.pop())
+    }
+  })
+
+  watch(list2, (newList2) => {
+    if (newList2.length > 4){
+      console.log("list2 多余4个了。")
+      console.log(newList2)
+      console.log(newList2.value)
+      list0.value.push(newList2.pop())
+    }
+  })
+  watch(list3, (newList3) => {
+    if (newList3.length > 4){
+      console.log("list3 多余4个了。")
+      console.log(newList3)
+      console.log(newList3.value)
+      list0.value.push(newList3.pop())
+    }
+  })
 </script>
 
 <style scoped>
@@ -406,6 +431,7 @@ const list0 = ref([
     width:32%;
     height: 10vh;
     margin-left: 1%;
+    margin-top: 3px;
     
 }
 /* .container {
@@ -415,11 +441,11 @@ const list0 = ref([
 .center-vertical{
   position: relative;
   top:38%;
-  transform:translateY(-50%);
+  transform:translateY(-46%);
 }
 .center-horizontal{
   position: relative;
-  left:33%;
+  left:26%;
   transform:translateX(-50%); 
 }
 .text_font_size {
