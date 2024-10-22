@@ -128,7 +128,20 @@
 
 
       </VueDraggable>
-      <el-text  tag="b" class="mx-1" size="large" style="background-color:aquamarine;">从选好的12张卡牌中,按照最符合自己性格特点进行排序,将对应的卡牌拖拽到对应的行中,保存截图发给咨询师进行解读</el-text>
+      <div v-if="list1.length == 4 && list2.length==4 && list3.length==4" style="margin-bottom: 12px;">
+      <!-- <div> -->
+        <el-text class="mx-1" size="large" style="background-color: #d7502f;"><br/>活泼型:{{redScore}} 分</el-text>
+        <el-text class="mx-1" size="large" style="background-color: #4693be;">完美型：{{blueScore}} 分</el-text>
+        <el-text class="mx-1" size="large" style="background-color: #f7d522;">力量型：{{yellowScore}} 分</el-text>
+        <el-text class="mx-1" size="large" style="background-color: #4aac4f;">和平型：{{greenScore}} 分</el-text>
+      </div>
+      <div style="margin-bottom: 12px;">
+        <el-text  tag="b" class="mx-1" size="large" type="danger">测试前必读：</el-text>
+        <el-text  class="mx-1" size="large" type="danger"> <br/>
+          从选好的12张卡牌中,按照最符合自己性格特点进行排序,将对应的卡牌拖拽到对应的行中,保存截图发给咨询师进行解读
+        </el-text>
+      </div>
+      
       <VueDraggable
         v-model="list0"
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
@@ -302,6 +315,35 @@ imageMap.set("c1",yellow_3_0)
 imageMap.set("c2",green_1_1)
 
 
+function getScore(num:string){
+  if (num=="11"){ return {color:"red",score:2} }
+  if (num=="12"){ return {color:"green",score:2} }
+  if (num=="21"){ return {color:"red",score:1} }
+  if (num=="22"){ return {color:"blue",score:3} }
+  if (num=="31"){ return {color:"red",score:1} }
+  if (num=="32"){ return {color:"blue",score:3} }
+  if (num=="41"){ return {color:"red",score:2} }
+  if (num=="42"){ return {color:"yellow",score:2} }
+  if (num=="51"){ return {color:"red",score:3} }
+  if (num=="52"){ return {color:"blue",score:1} }
+  if (num=="61"){ return {color:"red",score:3} }
+  if (num=="62"){ return {color:"blue",score:1} }
+  if (num=="71"){ return {color:"blue",score:2} }
+  if (num=="72"){ return {color:"yellow",score:2} }
+  if (num=="81"){ return {color:"blue",score:2} }
+  if (num=="82"){ return {color:"green",score:2} }
+  if (num=="91"){ return {color:"yellow",score:1} }
+  if (num=="92"){ return {color:"green",score:3} }
+  if (num=="a1"){ return {color:"yellow",score:1} }
+  if (num=="a2"){ return {color:"green",score:3} }
+  if (num=="b1"){ return {color:"yellow",score:3} }
+  if (num=="b2"){ return {color:"green",score:1} }
+  if (num=="c1"){ return {color:"yellow",score:3} }
+  if (num=="c2"){ return {color:"green",score:1} }
+
+}
+
+
 
 import { useSelectValueStore } from '@/stores/selected'
 import { ref,reactive, watch, computed } from 'vue'
@@ -405,6 +447,97 @@ const list0 = ref([
       console.log(newList3.value)
       list0.value.push(newList3.pop())
     }
+  })
+
+  const redScore = computed(() => {
+    let redS = 0
+    list1.value.forEach(item => {
+      console.log('-----')
+      console.log(item)
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "red"){
+          redS+=obj?.score + 2
+        }
+    })
+    list2.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "red"){
+          redS+=obj?.score +1
+        }
+    })
+    list3.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "red"){
+          redS+=obj?.score
+        }
+    })
+    return redS
+  })
+  const blueScore = computed(() => {
+    let redB = 0
+    list1.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "blue"){
+          redB+=obj?.score + 2
+        }
+    })
+    list2.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "blue"){
+          redB+=obj?.score +1
+        }
+    })
+    list3.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "blue"){
+          redB+=obj?.score
+        }
+    })
+    return redB
+  })
+  const yellowScore = computed(() => {
+    let redY = 0
+    list1.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "yellow"){
+          redY+=obj?.score + 2
+        }
+    })
+    list2.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "yellow"){
+          redY+=obj?.score +1
+        }
+    })
+    list3.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "yellow"){
+          redY+=obj?.score
+        }
+    })
+    return redY
+  })
+  const greenScore = computed(() => {
+    let redG = 0
+    list1.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "green"){
+          redG+=obj?.score + 2
+        }
+    })
+    list2.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "green"){
+          redG+=obj?.score +1
+        }
+    })
+    list3.value.forEach(item => {
+      let obj = getScore(<string>item.id)
+        if (obj?.color == "green"){
+          redG+=obj?.score
+        }
+    })
+    return redG
   })
 </script>
 
