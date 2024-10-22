@@ -1,5 +1,21 @@
 <template>
-    <div class="flex" style="margin-top: 2%;">
+  <!-- <el-container>
+      <el-header>
+        <el-container>
+          <div class="logo-container"><el-image :src="logo" alt="logo-images" fit="contain" @click="toHome"/></div>
+
+          <div>
+            <h1>心灵家园-性格色彩卡片测试</h1>
+            <h5>
+              <el-text  tag="b" class="mx-1" size="small" style="text-align: center;">
+                    对选择好的12张卡片经行分组
+                </el-text>
+            </h5>
+          </div>
+        </el-container>
+      </el-header>
+      <el-main> -->
+    <div class="flex">
         <el-text tag="b" size="large" style="margin-bottom: 5px;">
             最符合的四个卡片
         </el-text>
@@ -21,16 +37,16 @@
     </div>
 
     <div v-if="list1.length<4" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-        <text class="center-vertical center-horizontal ">最符合</text> 
+        <text class="center-vertical center-horizontal text_font_size">最符合</text> 
     </div> 
     <div v-if="list1.length<3" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-        <text class="center-vertical center-horizontal">最符合</text> 
+        <text class="center-vertical center-horizontal text_font_size">最符合</text> 
     </div> 
     <div v-if="list1.length<2" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-      <text class="center-vertical center-horizontal ">最符合</text> 
+      <text class="center-vertical center-horizontal text_font_size">最符合</text> 
     </div> 
     <div v-if="list1.length<1" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-      <text class="center-vertical center-horizontal">最符合</text> 
+      <text class="center-vertical center-horizontal text_font_size">最符合</text> 
     </div> 
     <!-- <div v-if="list1.length<4" style="display: inline-block;height: 100px;width: 12%; margin-left: 2%; background: red;"> </div>
     <div v-if="list1.length<4" style="display: inline-block;height: 100px;width: 12%; margin-left: 2%; background: red;"> </div>
@@ -63,16 +79,16 @@
       </div>
 
       <div v-if="list2.length<4" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-        <text class="center-vertical center-horizontal ">比较符合</text> 
+        <text class="center-vertical center-horizontal text_font_size">比较符合</text> 
       </div> 
       <div v-if="list2.length<3" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-          <text class="center-vertical center-horizontal">比较符合</text> 
+          <text class="center-vertical center-horizontal text_font_size">比较符合</text> 
       </div> 
       <div v-if="list2.length<2" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-          <text class="center-vertical center-horizontal ">比较符合</text> 
+          <text class="center-vertical center-horizontal text_font_size">比较符合</text> 
       </div> 
       <div v-if="list2.length<1" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-          <text class="center-vertical center-horizontal">比较符合</text> 
+          <text class="center-vertical center-horizontal text_font_size">比较符合</text> 
       </div> 
 
       </VueDraggable>
@@ -98,16 +114,16 @@
       </div>
       
       <div v-if="list3.length<4" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-        <text class="center-vertical center-horizontal ">一般符合</text> 
+        <text class="center-vertical center-horizontal text_font_size">一般符合</text> 
       </div> 
       <div v-if="list3.length<3" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-          <text class="center-vertical center-horizontal">一般符合</text> 
+          <text class="center-vertical center-horizontal text_font_size">一般符合</text> 
       </div> 
       <div v-if="list3.length<2" class="place_container  cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-        <text class="center-vertical center-horizontal ">一般符合</text> 
+        <text class="center-vertical center-horizontal text_font_size">一般符合</text> 
       </div> 
       <div v-if="list3.length<1" class="place_container cursor-move h-30 bg-gray-500/5 rounded p-3"> 
-        <text class="center-vertical center-horizontal">一般符合</text> 
+        <text class="center-vertical center-horizontal text_font_size">一般符合</text> 
       </div> 
 
 
@@ -125,7 +141,7 @@
         <div
         v-for="item in list0"
         :key="item.id"
-        class="image_container cursor-move h-30 bg-gray-500/5 rounded p-3"
+        class="image_container_first cursor-move h-30 bg-gray-500/5 rounded p-3"
       >
       <el-image :src="getSrc(item.id)"   fit="contain">
         <template #error>
@@ -158,9 +174,13 @@
       </el-row> -->
       </VueDraggable>
     </div>
+  <!-- </el-main>
+  </el-container> -->
   </template>
   
 <script lang="ts" setup>
+import logo from '@/assets/images/icon.jpg'
+
     // 1
 // 正红色2分：主动帮助别人
 // 反绿色2分：静待问题过去
@@ -287,6 +307,8 @@ import { VueDraggable } from 'vue-draggable-plus'
 import { useSelectValueStore } from '@/stores/selected'
 import { ref,reactive, watch, computed } from 'vue'
 
+import {RouterLink, RouterView, useRouter} from "vue-router";
+
 const selectedValue = useSelectValueStore()
 
 function onUpdate() {
@@ -355,6 +377,10 @@ const list0 = ref([
     {"id": selectedValue.radio11},
     {"id": selectedValue.radio12}
   ])
+  const router = useRouter();
+  function toHome() {
+    router.push({path:'/'})
+  } 
 </script>
 
 <style scoped>
@@ -363,28 +389,41 @@ const list0 = ref([
     width:  24%;
     background-color: rgb(214, 220, 228);
     margin-left: 1%;
-    height: 18vh;
+    height: 8vh;
     vertical-align:top;
+    margin-top: 3%;
+    margin-bottom: 3%;
 }
 .image_container {
     display: inline-block;
-    width:24%;
-    height: 18vh;
-    margin-left: 1%;
+    width:25%;
+    height: 8vh;
+    /* margin-left: 1%; */
+    margin-top: 3%;
 }
-.container {
+.image_container_first {
+    display: inline-block;
+    width:32%;
+    height: 10vh;
+    margin-left: 1%;
+    
+}
+/* .container {
   display: grid;
   gap: 10px;
-}
+} */
 .center-vertical{
   position: relative;
-  top:40%;
+  top:38%;
   transform:translateY(-50%);
 }
 .center-horizontal{
   position: relative;
-  left:40%;
+  left:33%;
   transform:translateX(-50%); 
+}
+.text_font_size {
+  font-size: 13px;
 }
 .image-slot {
   display: flex;
@@ -395,5 +434,21 @@ const list0 = ref([
   background: var(--el-fill-color-light);
   color: var(--el-text-color-secondary);
   font-size: 100px;
+}
+.el-header {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    background-color: #f2f2f2;
+}
+.el-main {
+  position: relative;
+  width: 100%;
+}
+.logo-container {
+  display: flex;
+  /* align-items: center; */
+  width: 36%;
+  height: 120px;
 }
 </style>

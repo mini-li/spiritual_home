@@ -2,19 +2,15 @@
    <div class="common-layout">
     <el-container>
       <el-header>
-        <el-container>
-          <div class="logo-container"><el-image :src="logo" alt="logo-images" fit="contain"/></div>
-
-          <div>
-            <h1>心灵家园-性格色彩卡片测试</h1>
+        <el-container >
+          <div class="logo-container"><el-image :src="logo" alt="logo-images" fit="contain" /></div>
+          <div style="display: block;">
+            <h4>心灵家园-性格色彩卡片测试</h4>
             <h5>
-              <el-text  tag="b" class="mx-1" size="large" style="text-align: center;">
+              <el-text  tag="b" class="mx-1" size="small" style="text-align: center;">
                     从12组卡片中选出12张符合自己的卡片({{ totalSelect }}/12)
                 </el-text>
             </h5>
-            <div style="display: flex; justify-content: center;">
-              <el-button v-if="totalSelect==12" type="success" round style="margin-left: 20px;" @click="toSelect">下一步</el-button>
-            </div>
           </div>
         </el-container>
         
@@ -145,17 +141,27 @@
         </el-row>
         <div style="margin-top: 5%;">
         <el-row>
-          <el-col :span="11"></el-col>
-          <el-col :span="13">
-            <div style="display: inline-block;">
+          <!-- <el-col :span="6"></el-col> -->
+          <el-col :span="12">
+            <div style="display: flex; justify-content: center;">
               <el-button v-if="activeStep>1 && activeStep < 13"   @click="activeStep--" plain :style="{
                 boxShadow: `var(${'--el-box-shadow'})`,
               }">上一组</el-button>
             </div>
-            <div style="display: inline-block;">
+           
+          </el-col>
+          
+          <el-col :span="12">
+            <div style="display: flex; justify-content: center;">
               <el-button v-if="activeStep>0 && activeStep < 12" @click="nextStep" :style="{
                 boxShadow: `var(${'--el-box-shadow'})`,
               }">下一组</el-button>
+            </div>
+          </el-col>
+          <!-- <el-col :span="6"></el-col> -->
+          <el-col :span="24"> 
+            <div style="display: flex; justify-content: center;">
+              <el-button v-if="totalSelect==12" type="success" round  @click="toSelect">下一步</el-button>
             </div>
           </el-col>
         </el-row>
@@ -315,8 +321,10 @@ const totalSelect = computed(() => {
   const router = useRouter();
   function toSelect() {
     router.push({path:'/select'})
-} 
-
+  } 
+  function toHome() {
+    router.push({path:'/'})
+  } 
 watch(() => selectedValue.radio1, (newValue, oldValue) => {
     console.log('------')
     console.log(newValue)
@@ -359,7 +367,7 @@ function nextStep(){
 .el-header {
     position: relative;
     width: 100%;
-    height: 120px;
+    height: 10%;
     background-color: #f2f2f2;
 }
 
@@ -372,10 +380,16 @@ h5 {
 }
 
 .logo-container {
-  display: flex;
+  position: relative;
+  /* display: flex; */
   /* align-items: center; */
-  width: 36%;
-  height: 120px;
+  /* justify-content: left; */
+  /* width: 36%; */
+  width: 25%;
+  height: 10%;
+  transform:translateX(-20%);
+  /* transform:translateY(+5%); */
+  margin-top: 20px;
 }
 .shadow {
   boxShadow: var('--el-box-shadow')
