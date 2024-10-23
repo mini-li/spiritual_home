@@ -35,7 +35,7 @@
             <el-radio-group v-model="selectedValue.radio3" @change="addNext">
               <el-col :span="12" > <el-radio-button value="31" size="small"><el-image :src="red_1_1"  /> </el-radio-button></el-col>
               
-              <el-col :span="12" > <el-radio-button value="22" size="small"><el-image :src="blue_3_0" /> </el-radio-button></el-col>
+              <el-col :span="12" > <el-radio-button value="32" size="small"><el-image :src="blue_3_0" /> </el-radio-button></el-col>
             </el-radio-group>
           </el-col>
         </el-row>
@@ -352,6 +352,63 @@ watch(() => selectedValue.radio1, (newValue, oldValue) => {
     console.log('------')
     console.log(newValue)
     selectedValue.$patch({ radio1:newValue })
+});
+watch(() => selectedValue.radio2, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio2:newValue })
+});
+watch(() => selectedValue.radio3, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio3:newValue })
+});
+watch(() => selectedValue.radio4, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio4:newValue })
+});
+watch(() => selectedValue.radio5, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio5:newValue })
+});
+
+watch(() => selectedValue.radio6, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio6:newValue })
+});
+
+watch(() => selectedValue.radio7, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio7:newValue })
+});
+watch(() => selectedValue.radio8, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio8:newValue })
+});
+watch(() => selectedValue.radio9, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio9:newValue })
+});
+watch(() => selectedValue.radio10, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio10:newValue })
+});
+watch(() => selectedValue.radio11, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio11:newValue })
+});
+watch(() => selectedValue.radio12, (newValue, oldValue) => {
+    console.log('------')
+    console.log(newValue)
+    selectedValue.$patch({ radio12:newValue })
 });
 
 

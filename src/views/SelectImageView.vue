@@ -23,8 +23,6 @@
         v-model="list1"
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
         group="myImage"
-        data-step="2" 
-        data-intro="将最符合的卡片拖动到这里"
         @update="onUpdate"
         @add="onAdd1"
         @remove="remove"
@@ -68,8 +66,6 @@
         v-model="list2"
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
         group="myImage"
-        data-step="3" 
-        data-intro="将比较符合的卡片拖动到这里"
         @update="onUpdate"
         @add="onAdd2"
         @remove="remove"
@@ -104,8 +100,6 @@
         v-model="list3"
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
         group="myImage"
-        data-step="4" 
-        data-intro="将一般符合的卡片拖动到这里"
         @update="onUpdate"
         @add="onAdd3"
         @remove="remove"
@@ -147,9 +141,9 @@
         </el-row>
       </div>
       <div v-else style="margin-bottom: 12px;">
-        <el-text  tag="b" class="mx-1" size="large" type="danger">测试前必读：</el-text>
+        <!-- <el-text  tag="b" class="mx-1" size="large" type="danger">测试前必读：</el-text> -->
         <el-text  class="mx-1" size="large" type="danger"> <br/>
-          按照最符合,比较符合,一般符合的优先顺序来排序,将下面12张卡牌移动到上面对应的灰色方框中
+          剩下需要排序的卡牌: {{list0.length}} 张
         </el-text>
       </div>
       
@@ -158,7 +152,8 @@
         class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
         group="myImage"
         data-step="1" 
-        data-intro="选择一张最符合的卡片按住不放向上拖动"
+        data-title="测试引导" 
+        data-intro="按照最符合,比较符合,一般符合的优先顺序来排序,将下面12张卡牌移动到上面对应的灰色方框中"
         @update="onUpdate"
         @add="onAdd"
         @remove="remove"
@@ -559,7 +554,7 @@ const list0 = ref([
     .setOptions({
         nextLabel: '下一步',  // 下一个按钮文字
         prevLabel: '上一步',  // 上一个按钮文字
-        skipLabel: '跳过',    // 跳过按钮文字
+        // skipLabel: '跳过',    // 跳过按钮文字
         doneLabel: '完成',// 完成按钮文字
         hidePrev: true,       // 在第一步中是否隐藏上一个按钮
         hideNext: false,       // 在最后一步中是否隐藏下一个按钮
@@ -568,20 +563,37 @@ const list0 = ref([
         disableInteraction: true,   // 是否禁用与突出显示的框内的元素的交互，就是禁止点击
         // showBullets: false,          // 是否显示面板指示点
         tooltipPosition: `bottom` /* 引导说明框相对高亮说明区域的位置 */,
+        positionPrecedence: ["top-middle-aligned", "top", "right", "left"],
         tooltipClass: `` /* 引导说明文本框的样式 */,
         highlightClass: `` /* 说明高亮区域的样式 */,
         keyboardNavigation: false /* 是否允许键盘来操作 */,
         showButtons: true /* 是否按键来操作 */,
-        showBullets: true /* 是否使用点点点显示进度 */,
-        // showProgress: false /* 是否显示进度条 */,
+        showBullets: false /* 是否使用点点点显示进度 */,
+        showProgress: false /* 是否显示进度条 */,
         scrollToElement: true /* 是否滑动到高亮的区域 */,
-        overlayOpacity: 0.6 /* 遮罩层的透明度 */,
-        hintPosition: 'top-middle',
+        overlayOpacity: 0.8 /* 遮罩层的透明度 */,
+        // hintPosition: 'top-middle',
+        // hintPosition: 'top-left',
+        hintPosition: 'bottom-middle',
+        hintButtonLabel: 'Got it',
+        buttonClass: "introjs-button",
+        helperElementPadding: 1,
+        exitOnEsc: true,
     }).start()
 }
 onMounted(() => {
   guide()
   console.log(`the component is now mounted.`)
+  
+  const byClass = Array.from(document.getElementsByClassName('introjs-tooltip') as HTMLCollectionOf<HTMLElement>)
+  byClass.forEach(box => {
+  // box.style.backgroundColor = 'lime';
+  // box.style.color = 'white';
+  box.style.opacity = '0.8';
+  // box.style.maxWidth = '90%';
+});
+
+  
 })
 
 </script>
