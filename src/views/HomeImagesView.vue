@@ -7,9 +7,7 @@
           <div style="display: block; margin-top: 10px;">
             <h2>心灵家园-性格分析测试</h2>
           </div>
-        </el-container>
-        
-       
+        </el-container>       
       </el-header> 
       <div class="mybody">
         <el-row v-if="activeStep==1" :gutter="3">
@@ -167,7 +165,7 @@
             1. 选择:<br/>
             <p>
               从2个卡牌中,选择相对更加符合自己的性格特点,一共选择12张。({{ totalSelect }}/12) <br/>
-              选错了可以返回重新选择。
+              选错了可以点击按钮:上一组,重新选择。
             </p>
              
           <!-- </el-text> -->
@@ -366,7 +364,36 @@ function getRaidoValue(step:Number){
   if (step ==2){
     return selectedValue.radio2
   }
-
+  if (step ==3){
+    return selectedValue.radio3
+  }
+  if (step ==4){
+    return selectedValue.radio4
+  }
+  if (step ==5){
+    return selectedValue.radio5
+  }
+  if (step ==6){
+    return selectedValue.radio6
+  }
+  if (step ==7){
+    return selectedValue.radio7
+  }
+  if (step ==8){
+    return selectedValue.radio8
+  }
+  if (step ==9){
+    return selectedValue.radio9
+  }
+  if (step ==10){
+    return selectedValue.radio10
+  }
+  if (step ==11){
+    return selectedValue.radio11
+  }
+  if (step ==12){
+    return selectedValue.radio12
+  }
 
 }
 const mesasgeTip = () => {
@@ -385,7 +412,11 @@ function nextStep(){
 }
 
 function addNext(){
-  setTimeout(()=>{activeStep.value++}, 400);
+  setTimeout(()=>{
+    if (getRaidoValue(activeStep.value) !== ''){
+      activeStep.value++
+    }
+  }, 400);
 }
 
 
