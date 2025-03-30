@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div class="el-header">
-      <img :src="logo" alt="logo-images" class="header-logo"/>
-      <span class="header-title">心安家园-性格测试</span>
-    </div>
-
+    <HeaderLogo :logo="logo"/>
     <div class="img-container" v-if="activeStep <= 12">
       <div class="img-box" :class="isActive(1)" v-on:click="addNext(1)">
         <el-image :src="getImg(1)"  />
@@ -217,7 +213,7 @@ const images = [
     { src: green_1_1, score: 1, value: "c2" },
   ],
 ];
-
+import HeaderLogo from "@/components/HeaderLogo.vue";
 // logo
 import logo from "@/assets/images/icon.png";
 
@@ -294,60 +290,10 @@ function addNext(index: any) {
 </script>
 
 <style scoped>
-.el-header {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between; */
-  /* padding: 0 20px; */
-  height: 100px;
-  background-color: #f2f2f2;
-  border-bottom: 1px solid #eee;
-  box-shadow: var(--el-box-shadow);
-  margin-bottom: 5%;
-}
 
-@media (max-width: 600px) {
-  .el-header {
-    height: 100px;
-  }
-  .header-logo {
-    float: left;
-    height: 100px;
-    font-size: 0;
-    display: inline;
-  }
-  .header-title {
-    float: right;
-    font-size: 18px;
-    font-weight: bold;
-    color: #303133;
-    line-height: 100px;
-    align-items: center;
-  }
-}
-@media (min-width: 600px) {
-  .el-header {
-    height: 200px;
-  }
-  .header-logo {
-    float: left;
-    height: 200px;
-    font-size: 0;
-    display: inline;
-  }
-  .header-title {
-    float: right;
-    font-size: 36px;
-    font-weight: bold;
-    color: #303133;
-    /* line-height: 10vh; */
-    align-items: center;
-    /* margin-right: 1vh; */
-    line-height: 200px;
-  }
-}
 
 .img-container {
+  margin-top: 3%;
   width: 100%;
   display: flex;
   flex-direction: row;

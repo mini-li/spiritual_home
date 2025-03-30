@@ -1,19 +1,17 @@
 <template>
   <div>
-    <div class="el-header">
-      <img :src="logo" alt="logo-images" class="header-logo"/>
-      <span class="header-title">心安家园-性格测试</span>
-    </div>
+    <HeaderLogo :logo="logo" />
     <div class="select-header">
       <span>最符合的四个卡片</span>
     </div>
     <VueDraggable
       v-model="list1"
       class="draggable-container"
+      id="drag-list1"
       group="myImage"
-      @update="onUpdate"
+      @update="onUpdate1"
       @add="onAdd1"
-      @remove="remove"
+      @remove="remove1"
     >
       <div v-for="item in list1" :key="item.id" class="image_container">
         <el-image :src="getSrc(item.id)" fit="contain" class="disable-img"/>
@@ -41,10 +39,11 @@
     <VueDraggable
       v-model="list2"
       class="draggable-container"
+      id="drag-list2"
       group="myImage"
-      @update="onUpdate"
+      @update="onUpdate2"
       @add="onAdd2"
-      @remove="remove"
+      @remove="remove2"
     >
       <div
         v-for="item in list2"
@@ -73,10 +72,11 @@
     <VueDraggable
       v-model="list3"
       class="draggable-container"
+      id="drag-list3"
       group="myImage"
       @update="onUpdate"
       @add="onAdd3"
-      @remove="remove"
+      @remove="remove3"
     >
       <div
         v-for="item in list3"
@@ -174,13 +174,14 @@
     <VueDraggable
       v-model="list0"
       class="flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-gray-500/5 rounded overflow-auto"
+      id="drag-list0"
       group="myImage"
       data-step="1"
       data-title="测试引导"
       data-intro="按照最符合,比较符合,一般符合的优先顺序来排序,将下面12张卡牌移动到上面对应的灰色方框中"
       @update="onUpdate"
       @add="onAdd"
-      @remove="remove"
+      @remove="remove0"
     >
       <!-- <el-row> -->
       <div
@@ -203,6 +204,8 @@
 </template>
 
 <script lang="ts" setup>
+import HeaderLogo from "@/components/HeaderLogo.vue";
+
 import logo from "@/assets/images/icon.png";
 
 // 1
@@ -399,7 +402,7 @@ function getScore(num: string) {
 }
 
 import { useSelectValueStore } from "@/stores/selected";
-import { ref, reactive, watch, computed } from "vue";
+import { ref, reactive, watch, computed, toRef,toRefs } from "vue";
 
 import { RouterLink, RouterView, useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
@@ -407,6 +410,7 @@ import { VueDraggable, type DraggableEvent } from "vue-draggable-plus";
 import introJs from "intro.js";
 import "intro.js/introjs.css";
 import { onMounted } from "vue";
+import { sr } from "element-plus/es/locale/index.mjs";
 
 const selectedValue = useSelectValueStore();
 
@@ -420,37 +424,118 @@ const lengthTip = () => {
 function onUpdate() {
   console.log("update");
 }
+function onUpdate1() {
+  console.log("update1");
+  console.log(list1.value);
+}
+function onUpdate2() {
+  console.log("update2");
+  console.log(list2.value);
+}
 
-function onAdd1() {
-  console.log("add1");
-  // console.log(event)
+
+function onAdd1(event: any) {
+  console.log(event);
+  const { oldIndex=0,newIndex=0 }= event;
+  const  srcId = event.from.id;
+  // console.log(srcId);
+  // console.log(newIndex);
+  // console.log(oldIndex);
+  // console.log(clonedData);
+  // console.log("---------------");
+  // list1.value.forEach((item) => {
+  //   console.log(item);
+  // });
   if (list1.value.length > 4) {
-    lengthTip();
-  }
+    const destIndex = newIndex < 4 ? newIndex+1  : 3;
+    // console.log("destIndex");
+    // console.log(destIndex);
+    //将多出来的图片找出来
+    const oldItem = list1.value.splice(destIndex, 1);
+    // console.log("oldItem");
+    // console.log(oldItem[0]);
+    if (srcId == "drag-list0" && oldItem.length > 0 ) {
+      console.log("从第0个来");
+      list0.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+    if (srcId == "drag-list2"  && oldItem.length > 0) {
+      console.log("从第二个来");
+      list2.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+    if (srcId == "drag-list3" && oldItem.length > 0 ) {
+      console.log("从第三个来");
+      list3.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+  } 
 }
-function onAdd2() {
+function onAdd2(event: any) {
   console.log("add2");
-  // console.log(event)
+
+  const { oldIndex=0,newIndex=0 }= event;
+  const  srcId = event.from.id;
   if (list2.value.length > 4) {
-    lengthTip();
-  }
+    const destIndex = newIndex < 4 ? newIndex+1  : 3;
+    //将多出来的图片找出来
+    const oldItem = list2.value.splice(destIndex, 1);
+    if (srcId == "drag-list0" && oldItem.length > 0 ) {
+      console.log("从第0个来");
+      list0.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+    if (srcId == "drag-list1"  && oldItem.length > 0 ) {
+      console.log("从第一个来");
+      list1.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+    if (srcId == "drag-list3" && oldItem.length > 0 ) {
+      console.log("从第三个来");
+      list3.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+  } 
 }
 
-function onAdd3() {
+function onAdd3(event: any) {
   console.log("add3");
+  const { oldIndex=0,newIndex=0 }= event;
+  const  srcId = event.from.id;
   // console.log(event)
   if (list3.value.length > 4) {
-    lengthTip();
-  }
-  // console.log(event.to)
-  // list0.value.push(target)
+    const destIndex = newIndex < 4 ? newIndex+1  : 3;
+    console.log("destIndex");
+    console.log(destIndex);
+    //将多出来的图片找出来
+    const oldItem = list3.value.splice(destIndex, 1);
+    console.log("oldItem");
+    console.log(oldItem[0]);
+    if (srcId == "drag-list0" && oldItem.length > 0 ) {
+      console.log("从第0个来");
+      list0.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+    if (srcId == "drag-list1"  && oldItem.length > 0 ) {
+      console.log("从第一个来");
+      list1.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+    if (srcId == "drag-list2" && oldItem.length > 0 ) {
+      console.log("从第二个来");
+      list2.value.splice(oldIndex+1, 0, oldItem[0]);
+    } 
+  } 
 }
 
 function onAdd() {
   console.log("add");
 }
-function remove() {
-  console.log("remove");
+function remove0() {
+  console.log("remove0");
+}
+function remove1() {
+  console.log("remove1");
+  // console.log(list1.value);
+}
+function remove2() {
+  console.log("remove2");
+  // console.log(list2.value);
+}
+function remove3() {
+  console.log("remove3");
 }
 function getSrc(index_key: string) {
   return imageMap.get(index_key);
@@ -478,31 +563,33 @@ function toHome() {
   router.push({ path: "/" });
 }
 
-watch(list1, (newList1) => {
-  if (newList1.length > 4) {
-    console.log("list1 多余4个了。");
-    console.log(newList1);
-    console.log(newList1.value);
-    list0.value.push(newList1.pop());
-  }
-});
+// watch(list1, (newList1) => {
+//   if (newList1.length > 4) {
+//     // console.log("list1 old");
+//     // console.log(list1.value);
+//     // console.log("list1 多余4个了。");
+//     // console.log(newList1);
+//     // console.log(newList1.value);
+//     list0.value.push(newList1.pop());
+//   }
+// });
 
-watch(list2, (newList2) => {
-  if (newList2.length > 4) {
-    console.log("list2 多余4个了。");
-    console.log(newList2);
-    console.log(newList2.value);
-    list0.value.push(newList2.pop());
-  }
-});
-watch(list3, (newList3) => {
-  if (newList3.length > 4) {
-    console.log("list3 多余4个了。");
-    console.log(newList3);
-    console.log(newList3.value);
-    list0.value.push(newList3.pop());
-  }
-});
+// watch(list2, (newList2) => {
+//   if (newList2.length > 4) {
+//     console.log("list2 多余4个了。");
+//     console.log(newList2);
+//     console.log(newList2.value);
+//     list0.value.push(newList2.pop());
+//   }
+// });
+// watch(list3, (newList3) => {
+//   if (newList3.length > 4) {
+//     console.log("list3 多余4个了。");
+//     console.log(newList3);
+//     console.log(newList3.value);
+//     list0.value.push(newList3.pop());
+//   }
+// });
 
 const redScore = computed(() => {
   let redS = 0;
@@ -648,13 +735,16 @@ onMounted(() => {
 <style scoped>
 
 .select-header {
+  margin-top: 2%;
+  margin-bottom: 1%;
   /* 上边 | 右边 | 下边 | 左边 */
-  padding: 5px 5px 0px 5px;
+  padding: 0px 5px 0px 5px;
   font-size: 18px;
   font-weight: bold;
   color: #505050;
   /* margin: 2% 0; */
 }
+
 
 .place_container {
   display: flex;
@@ -662,7 +752,7 @@ onMounted(() => {
   width: calc(100vw/4);
   height: calc(100vw/4/1016*638);
   /* height: 100px; */
-  margin: 5px 1px;
+  margin: 5px 1px 0px 1px;
   border-radius: 2px;
   justify-content: center;
   align-items: center;
@@ -683,7 +773,7 @@ onMounted(() => {
 .image_container {
   width: 25%;
   font-size: 0;
-  margin: 5px 0px;
+  margin: 5px 1px 0px 1px;
 }
 
 .image_container_first {
@@ -706,57 +796,6 @@ onMounted(() => {
   background: var(--el-fill-color-light);
   color: var(--el-text-color-secondary);
   font-size: 100px;
-}
-.el-header {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between; */
-  /* padding: 0 20px; */
-  height: 100px;
-  background-color: #f2f2f2;
-  border-bottom: 1px solid #eee;
-  box-shadow: var(--el-box-shadow);
-}
-
-@media (max-width: 600px) {
-  .el-header {
-    height: 100px;
-  }
-  .header-logo {
-    float: left;
-    height: 100px;
-    font-size: 0;
-    display: inline;
-  }
-  .header-title {
-    float: right;
-    font-size: 18px;
-    font-weight: bold;
-    color: #303133;
-    line-height: 100px;
-    align-items: center;
-  }
-}
-@media (min-width: 600px) {
-  .el-header {
-    height: 200px;
-  }
-  .header-logo {
-    float: left;
-    height: 200px;
-    font-size: 0;
-    display: inline;
-  }
-  .header-title {
-    float: right;
-    font-size: 36px;
-    font-weight: bold;
-    color: #303133;
-    /* line-height: 10vh; */
-    align-items: center;
-    /* margin-right: 1vh; */
-    line-height: 200px;
-  }
 }
 
 .disable-img{
