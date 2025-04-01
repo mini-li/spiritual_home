@@ -1,7 +1,7 @@
 <template>
   <div class="header-logo">
     <img :src="logo" alt="logo-images" class="header-logo-img" />
-    <span class="header-logo-title">心安家园-性格测试</span>
+    <span class="header-logo-title">性格测试</span>
   </div>
 </template>
 
@@ -20,11 +20,11 @@ const props = defineProps({
   padding: 0 5%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between; 
+  justify-content: space-around;
   justify-items: center;
   align-items: center;
   /* padding: 0 20px; */
-  height: 100px;
+  height: 70px;
   background-color: #f2f2f2;
   border-bottom: 1px solid #eee;
   box-shadow: var(--el-box-shadow);
@@ -33,17 +33,18 @@ const props = defineProps({
 
 @media (max-width: 600px) {
   .header-logo {
-    height: 100px;
+    height: 90px;
   }
   .header-logo-img {
-    height: 68px;
+    height: 80px;
     font-size: 0;
     display: inline;
   }
   .header-logo-title {
-    font-size: 26px;
+    font-size: 56px;
     font-weight: bold;
-    color: #303133;
+    /* color: #303133; */ 
+    color: #e49b0e;
     line-height: 100px;
   }
 }

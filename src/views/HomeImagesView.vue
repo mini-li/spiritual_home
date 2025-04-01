@@ -86,82 +86,82 @@ import { RouterLink, RouterView, useRouter } from "vue-router";
 // 正红色2分：主动帮助别人
 // 反绿色2分：静待问题过去
 
-import red_2_1 from "@/assets/images/red_2_1.png";
-import green_2_1 from "@/assets/images/green_2_1.png";
+import red_2_1 from "@/assets/images/red_2_1.jpeg";
+import green_2_1 from "@/assets/images/green_2_1.jpeg";
 
 // 2.
 // 红色1，积极乐观
 // 蓝色3，悲观多疑
 
-import red_1_0 from "@/assets/images/red_1_0.png";
-import blue_3_1 from "@/assets/images/blue_3_1.png";
+import red_1_0 from "@/assets/images/red_1_0.jpeg";
+import blue_3_1 from "@/assets/images/blue_3_1.jpeg";
 
 // 3.
 // 红色1分，主动分享
 // 蓝色3分，保守谨慎
-import red_1_1 from "@/assets/images/red_1_1.png";
-import blue_3_0 from "@/assets/images/blue_3_0.png";
+import red_1_1 from "@/assets/images/red_1_1.jpeg";
+import blue_3_0 from "@/assets/images/blue_3_0.jpeg";
 
 // 4.
 // 红色2分，别人认可更重要
 // 黄色2分，结果目标更重要
 
-import red_2_0 from "@/assets/images/red_2_0.png";
-import yellow_2_1 from "@/assets/images/yellow_2_1.png";
+import red_2_0 from "@/assets/images/red_2_0.jpeg";
+import yellow_2_1 from "@/assets/images/yellow_2_1.jpeg";
 
 // 5.
 // 红色3分，情绪多变
 // 蓝色1分，情绪内敛
 
-import red_3_1 from "@/assets/images/red_3_1.png";
-import blue_1_1 from "@/assets/images/blue_1_1.png";
+import red_3_1 from "@/assets/images/red_3_1.jpeg";
+import blue_1_1 from "@/assets/images/blue_1_1.jpeg";
 
 // 6.
 // 红色3分，随意自由
 // 蓝色1分，条理计划
 
-import red_3_0 from "@/assets/images/red_3_0.png";
-import blue_1_0 from "@/assets/images/blue_1_0.png";
+import red_3_0 from "@/assets/images/red_3_0.jpeg";
+import blue_1_0 from "@/assets/images/blue_1_0.jpeg";
 
 // 7.
 // 蓝色2分，慢慢研究问题
 // 黄色2分，快速解决问题
 
-import blue_2_1 from "@/assets/images/blue_2_1.png";
-import yellow_2_0 from "@/assets/images/yellow_2_0.png";
+import blue_2_1 from "@/assets/images/blue_2_1.jpeg";
+import yellow_2_0 from "@/assets/images/yellow_2_0.jpeg";
 
 // 8.
 // 蓝色2分，坚持原则更重要
 // 绿色2分，关心他人感受更重要
-import blue_2_0 from "@/assets/images/blue_2_0.png";
-import green_2_0 from "@/assets/images/green_2_0.png";
+import blue_2_0 from "@/assets/images/blue_2_0.jpeg";
+import green_2_0 from "@/assets/images/green_2_0.jpeg";
 
 // 9.
 // 黄色1分，目标坚定
 // 绿色3分，缺乏主见
-import yellow_1_1 from "@/assets/images/yellow_1_1.png";
-import green_3_1 from "@/assets/images/green_3_1.png";
+import yellow_1_1 from "@/assets/images/yellow_1_1.jpeg";
+import green_3_1 from "@/assets/images/green_3_1.jpeg";
 
 // 10.
 // 黄色1分，进取心强
 // 绿色3分，逆来顺受
 
-import yellow_1_0 from "@/assets/images/yellow_1_0.png";
-import green_3_0 from "@/assets/images/green_3_0.png";
+import yellow_1_0 from "@/assets/images/yellow_1_0.jpeg";
+import green_3_0 from "@/assets/images/green_3_0.jpeg";
 
 // 11.
 // 黄色3分，批判性强
 // 绿色1分，宽容平和
 
-import yellow_3_1 from "@/assets/images/yellow_3_1.png";
-import green_1_0 from "@/assets/images/green_1_0.png";
+import yellow_3_1 from "@/assets/images/yellow_3_1.jpeg";
+import green_1_0 from "@/assets/images/green_1_0.jpeg";
 
 // 12
 // 黄色3分，掌控一切
 // 绿色1分，以他人为中心
 
-import yellow_3_0 from "@/assets/images/yellow_3_0.png";
-import green_1_1 from "@/assets/images/green_1_1.png";
+import yellow_3_0 from "@/assets/images/yellow_3_0.jpeg";
+import green_1_1 from "@/assets/images/green_1_1.jpeg";
 
 const images = [
   [
@@ -293,14 +293,14 @@ function addNext(index: any) {
 
 
 .img-container {
-  margin-top: 3%;
+  margin-top: 2%;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 .img-box {
-  padding: 2px;
+  padding: 3px;
 
   /* img 是行内元素默认会换行这里需要掉 */
   font-size: 0;
@@ -311,7 +311,7 @@ function addNext(index: any) {
 
 @media (max-width: 600px) {
   .bottom-text {
-    margin-top: 5%;
+    /* margin-top: 1%; */
     margin-left: 2%;
   }
   .bottom-text > div:first-child {
