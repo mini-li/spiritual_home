@@ -1,18 +1,44 @@
 <template>
   <div>
     <HeaderLogo :logo="logo"/>
-    <div class="img-container" v-if="activeStep <= 12">
+    <div class="outer-container">
+      <div class="button-arrow" v-if="activeStep > 1">
+        <!-- <button
+          v-if="activeStep > 1"
+          @click="activeStep--"
+          ><el-icon class="el-icon--left"><ArrowLeft /></el-icon></button> -->
+          <button
+          v-if="activeStep > 1"
+          @click="activeStep--"
+          ><</button>
+    </div>
+      <div class="img-container">
+      
       <div class="img-box" :class="isActive(1)" v-on:click="addNext(1)">
         <el-image :src="getImg(1)"  />
       </div>
       <div class="img-box" :class="isActive(2)" v-on:click="addNext(2)">
         <el-image :src="getImg(2)" />
       </div>
+      
+    </div>
+    <div class="button-arrow">
+        <!-- <button
+          v-if="activeStep > 0 && activeStep < 12"
+          @click="nextStep"
+          ><el-icon class="el-icon--right"><ArrowRight /></el-icon></button
+        > -->
+        <button
+          v-if="activeStep > 0 && activeStep < 12"
+          @click="nextStep"
+          >></button
+        >
+    </div>
     </div>
     <div style="margin-top: 5%">
       <el-row>
         <!-- <el-col :span="6"></el-col> -->
-        <el-col :span="12">
+        <!-- <el-col :span="12">
           <div style="display: flex; justify-content: center">
             <el-button
               v-if="activeStep > 1"
@@ -24,9 +50,9 @@
               >上一组</el-button
             >
           </div>
-        </el-col>
+        </el-col> -->
 
-        <el-col :span="12">
+        <!-- <el-col :span="12">
           <div style="display: flex; justify-content: center">
             <el-button
               v-if="activeStep > 0 && activeStep < 12"
@@ -37,7 +63,7 @@
               >下一组</el-button
             >
           </div>
-        </el-col>
+        </el-col> -->
         <!-- <el-col :span="6"></el-col> -->
         <el-col :span="24">
           <div style="display: flex; justify-content: center">
@@ -75,93 +101,100 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, computed, reactive } from "vue";
 import { RouterLink, RouterView, useRouter } from "vue-router";
-
+import {
+  ArrowLeft,
+  ArrowRight,
+  Delete,
+  Edit,
+  Share,
+} from '@element-plus/icons-vue'
 // 1
 // 正红色2分：主动帮助别人
 // 反绿色2分：静待问题过去
 
-import red_2_1 from "@/assets/images/red_2_1.jpeg";
-import green_2_1 from "@/assets/images/green_2_1.jpeg";
+import red_2_1 from "@/assets/images_new/red_2_1.png";
+import green_2_1 from "@/assets/images_new/green_2_1.png";
 
 // 2.
 // 红色1，积极乐观
 // 蓝色3，悲观多疑
 
-import red_1_0 from "@/assets/images/red_1_0.jpeg";
-import blue_3_1 from "@/assets/images/blue_3_1.jpeg";
+import red_1_0 from "@/assets/images_new/red_1_0.png";
+import blue_3_1 from "@/assets/images_new/blue_3_1.png";
 
 // 3.
 // 红色1分，主动分享
 // 蓝色3分，保守谨慎
-import red_1_1 from "@/assets/images/red_1_1.jpeg";
-import blue_3_0 from "@/assets/images/blue_3_0.jpeg";
+import red_1_1 from "@/assets/images_new/red_1_1.png";
+import blue_3_0 from "@/assets/images_new/blue_3_0.png";
 
 // 4.
 // 红色2分，别人认可更重要
 // 黄色2分，结果目标更重要
 
-import red_2_0 from "@/assets/images/red_2_0.jpeg";
-import yellow_2_1 from "@/assets/images/yellow_2_1.jpeg";
+import red_2_0 from "@/assets/images_new/red_2_0.png";
+import yellow_2_1 from "@/assets/images_new/yellow_2_1.png";
 
 // 5.
 // 红色3分，情绪多变
 // 蓝色1分，情绪内敛
 
-import red_3_1 from "@/assets/images/red_3_1.jpeg";
-import blue_1_1 from "@/assets/images/blue_1_1.jpeg";
+import red_3_1 from "@/assets/images_new/red_3_1.png";
+import blue_1_1 from "@/assets/images_new/blue_1_1.png";
 
 // 6.
 // 红色3分，随意自由
 // 蓝色1分，条理计划
 
-import red_3_0 from "@/assets/images/red_3_0.jpeg";
-import blue_1_0 from "@/assets/images/blue_1_0.jpeg";
+import red_3_0 from "@/assets/images_new/red_3_0.png";
+import blue_1_0 from "@/assets/images_new/blue_1_0.png";
 
 // 7.
 // 蓝色2分，慢慢研究问题
 // 黄色2分，快速解决问题
 
-import blue_2_1 from "@/assets/images/blue_2_1.jpeg";
-import yellow_2_0 from "@/assets/images/yellow_2_0.jpeg";
+import blue_2_1 from "@/assets/images_new/blue_2_1.png";
+import yellow_2_0 from "@/assets/images_new/yellow_2_0.png";
 
 // 8.
 // 蓝色2分，坚持原则更重要
 // 绿色2分，关心他人感受更重要
-import blue_2_0 from "@/assets/images/blue_2_0.jpeg";
-import green_2_0 from "@/assets/images/green_2_0.jpeg";
+import blue_2_0 from "@/assets/images_new/blue_2_0.png";
+import green_2_0 from "@/assets/images_new/green_2_0.png";
 
 // 9.
 // 黄色1分，目标坚定
 // 绿色3分，缺乏主见
-import yellow_1_1 from "@/assets/images/yellow_1_1.jpeg";
-import green_3_1 from "@/assets/images/green_3_1.jpeg";
+import yellow_1_1 from "@/assets/images_new/yellow_1_1.png";
+import green_3_1 from "@/assets/images_new/green_3_1.png";
 
 // 10.
 // 黄色1分，进取心强
 // 绿色3分，逆来顺受
 
-import yellow_1_0 from "@/assets/images/yellow_1_0.jpeg";
-import green_3_0 from "@/assets/images/green_3_0.jpeg";
+import yellow_1_0 from "@/assets/images_new/yellow_1_0.png";
+import green_3_0 from "@/assets/images_new/green_3_0.png";
 
 // 11.
 // 黄色3分，批判性强
 // 绿色1分，宽容平和
 
-import yellow_3_1 from "@/assets/images/yellow_3_1.jpeg";
-import green_1_0 from "@/assets/images/green_1_0.jpeg";
+import yellow_3_1 from "@/assets/images_new/yellow_3_1.png";
+import green_1_0 from "@/assets/images_new/green_1_0.png";
 
 // 12
 // 黄色3分，掌控一切
 // 绿色1分，以他人为中心
 
-import yellow_3_0 from "@/assets/images/yellow_3_0.jpeg";
-import green_1_1 from "@/assets/images/green_1_1.jpeg";
+import yellow_3_0 from "@/assets/images_new/yellow_3_0.png";
+import green_1_1 from "@/assets/images_new/green_1_1.png";
 
 const images = [
   [
@@ -215,7 +248,7 @@ const images = [
 ];
 import HeaderLogo from "@/components/HeaderLogo.vue";
 // logo
-import logo from "@/assets/images/icon.png";
+import logo from "@/assets/images_new/icon.png";
 
 import { useSelectValueStore } from "@/stores/selected";
 import { watch } from "vue";
@@ -290,23 +323,53 @@ function addNext(index: any) {
 </script>
 
 <style scoped>
-
-
-.img-container {
-  margin-top: 2%;
+.outer-container{
   width: 100%;
   display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: stretch;
+}
+.button-arrow {
+  width: 20%;
+  display: flex;
+  align-items: center; /*垂直居中*/
+  justify-content: center;
+  flex: 0 0 10vw; 
+}
+/* .button-arrow:first {  
+  justify-content: ce;  
+}
+.button-arrow:last-of-type {
+  justify-content: end; 
+} */
+.button-arrow > button {
+
+  height: 80%;
+  background-color: white;
+  border: 0;
+  font-weight: bold;
+  font-size: 36px;
+  color: #666;
+  text-shadow: gold 1px 0 3px;
+  
+}
+.img-container {
+  margin-top: 2%;
+  /* width: 90%; */
+  display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .img-box {
-  padding: 3px;
+  padding: 5px;
 
   /* img 是行内元素默认会换行这里需要掉 */
   font-size: 0;
 }
 .active {
-  background: var(--el-menu-active-color);
+  /* background: var(--el-menu-active-color); */
+  background-color:#04f9ea;
 }
 
 @media (max-width: 600px) {
@@ -328,4 +391,5 @@ function addNext(index: any) {
     line-height: 1.6;
   }
 }
+
 </style>
