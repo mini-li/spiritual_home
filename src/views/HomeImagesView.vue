@@ -2,7 +2,7 @@
   <div>
     <HeaderLogo :logo="logo"/>
     <div class="outer-container">
-      <div class="button-arrow" v-if="activeStep > 1">
+      <div class="button-arrow">
         <!-- <button
           v-if="activeStep > 1"
           @click="activeStep--"
@@ -324,6 +324,7 @@ function addNext(index: any) {
 
 <style scoped>
 .outer-container{
+  margin-top: 10px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -335,7 +336,7 @@ function addNext(index: any) {
   display: flex;
   align-items: center; /*垂直居中*/
   justify-content: center;
-  flex: 0 0 10vw; 
+  flex: 0 0 48px; 
 }
 /* .button-arrow:first {  
   justify-content: ce;  
@@ -344,7 +345,7 @@ function addNext(index: any) {
   justify-content: end; 
 } */
 .button-arrow > button {
-
+  width: 100%;
   height: 80%;
   background-color: white;
   border: 0;
@@ -355,7 +356,7 @@ function addNext(index: any) {
   
 }
 .img-container {
-  margin-top: 2%;
+  /* margin-top: 2%; */
   /* width: 90%; */
   display: inline-flex;
   flex-direction: column;

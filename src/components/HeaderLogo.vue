@@ -41,7 +41,7 @@ const props = defineProps({
     display: inline;
   }
   .header-logo-title {
-    font-size: 56px;
+    font-size: 40px;
     font-weight: bold;
     /* color: #303133; */ 
     color: #e49b0e;
