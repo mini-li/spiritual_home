@@ -35,48 +35,13 @@
         >
     </div>
     </div>
-    <div style="margin-top: 5%">
-      <el-row>
-        <!-- <el-col :span="6"></el-col> -->
-        <!-- <el-col :span="12">
-          <div style="display: flex; justify-content: center">
-            <el-button
-              v-if="activeStep > 1"
-              @click="activeStep--"
-              plain
-              :style="{
-                boxShadow: `var(${'--el-box-shadow'})`,
-              }"
-              >上一组</el-button
-            >
-          </div>
-        </el-col> -->
-
-        <!-- <el-col :span="12">
-          <div style="display: flex; justify-content: center">
-            <el-button
-              v-if="activeStep > 0 && activeStep < 12"
-              @click="nextStep"
-              :style="{
-                boxShadow: `var(${'--el-box-shadow'})`,
-              }"
-              >下一组</el-button
-            >
-          </div>
-        </el-col> -->
-        <!-- <el-col :span="6"></el-col> -->
-        <el-col :span="24">
-          <div style="display: flex; justify-content: center">
-            <el-button
-              v-if="totalSelect == 12"
-              type="success"
-              round
-              @click="toSelect"
-              >下一步</el-button
-            >
-          </div>
-        </el-col>
-      </el-row>
+    <div class="next-button">
+      <button
+        v-if="totalSelect == 12"
+        round
+        @click="toSelect"
+        >下一步</button
+      >
     </div>
     <div class="bottom-text">
       <div>测试前必读：</div>
@@ -87,7 +52,7 @@
           从2个卡牌中,选择相对更加符合自己的性格特点,一共选择12张。({{
             totalSelect
           }}/12) <br />
-          选错了可以点击按钮:上一组,重新选择。
+          选错了可以点击图片两边的&gt;或&lt;来前后切换并重新选择。
         </div>
 
         <!-- </el-text> -->
@@ -392,5 +357,17 @@ function addNext(index: any) {
     line-height: 1.6;
   }
 }
+.next-button{
+  margin-top: 5%;
+  text-align: center;
+  font-weight:900;
+  font-size: 26px;
 
+}
+.next-button>button{
+  background-color: gold;
+  border: 0;
+  border-radius: 28px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
 </style>
